@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}
+SWEET HOME
+{% endblock %}
+
+
+{% block content %}
+<div id="home-section-1">
+<div class="container-fluid">
+    <!-- Hero -->
+    <div class="px-4 pt-5  my-5 text-center ">
+        <h1 class="display-4 mb-2 fw-bold">Stock Market Analyser</h1>
+        <div class="container">
+            <!-- <hr> -->
+        </div>
+        <div class="col-lg-6 pt-2 mx-auto">
+            <p class="lead mb-3 h3 " style="font-weight: 600;color: #0078ff;"> SMA can be used to analyze the historical performance of stocks within the Nifty 500 index 
+            </p>
+            
+        </div>
+        <!-- search function -->
+        <form class="d-flex mb-3 pt-2" style="max-width: 50vw;margin: auto;" >
+            <input class="form-control me-2"  id="highlight-box" type="search" placeholder="Type a Company Name or Symbol to Search" aria-label="Search" style="box-shadow: 0 5px 30px rgb(0 120 255 / 20%);">
+        </form>
+
+        <div class="bd-example"> Try :
+            <span class="btn btn-outline-primary badge" id="home-badge">TCS</span>
+            <span class="btn btn-outline-primary badge" id="home-badge">Reliance</span>
+            <span class="btn btn-outline-primary badge" id="home-badge">SBI</span>
+            </div>
+
+            <!-- <div class="overflow-hidden" style="max-height: 40vh;">
+                <div class="container px-5">
+                    <img src="../static/home-hero.jpg" class="img-fluid border rounded-3 shadow-lg mb-4"
+                        alt="Example image" width="700" height="500" loading="lazy">
+                </div>
+            </div> -->
+    </div>
+</div>
+</div>
+{% endblock %}

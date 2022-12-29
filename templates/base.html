@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="..//static/bootstrap5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/style.css">
+
+
+    <title>{% block title %} {% endblock %} </title>
+
+</head>
+
+
+<body>
+    <div class=" " id="navbar">
+                <!-- Navbar -->
+                <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                    <div class="container-fluid">
+                        <a class="navbar-brand" href="/" style="font-weight: 600;color: #0078ff;font-size: 30px;">SMA</a>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                                <li class="nav-item">
+                                    <a class="nav-link active" aria-current="page" href="/">Home</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/market">Market</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/ticker">Ticker</a>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        Learn
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <li><a class="dropdown-item" href="#">Fundamental Analysis</a></li>
+                                        <li><a class="dropdown-item" href="#">Technical Analysis</a></li>
+                                        <li>
+                                            <hr class="dropdown-divider">
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="predict">Predict</a>
+                                </li>
+                            </ul>
+                            <form class="d-flex">
+                                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                                <button class="btn btn-outline-success" type="submit">Search</button>
+                            </form>
+
+                        
+                        </div>
+                    </div>
+                </nav>
+        
+    </div>
+
+    {% block content %}
+
+    {% endblock %}
+
+    <div class="container" id="footer">
+                <!-- Footer -->
+                <footer class="row row-cols-5 py-5 my-5 border-top">
+                    <div class="col">
+                        <a href="/" class="d-flex align-items-center mb-3 link-dark text-decoration-none">
+                            <svg class="bi me-2" width="40" height="32">
+                                <use xlink:href="#bootstrap"></use>
+                            </svg>
+                        </a>
+                        <h1><a href="/">SMA</a></h1> <!-- added one -->
+                        <p class="text-muted">© 2023</p>
+                    </div>
+        
+                    <div class="col">
+        
+                    </div>
+        
+                    <div class="col">
+                        <h5>Section</h5>
+                        <ul class="nav flex-column">
+                            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
+                            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
+                            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
+                            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
+                            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
+                        </ul>
+                    </div>
+            
+            </footer>
+    </div>
+    <script src="../static/bootstrap5/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
