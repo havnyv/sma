@@ -33,53 +33,22 @@ tock
                     {% endwith %}
                 </select>
             </div>
-            <div class="col"><b>for period</b></div>
 
-            <div class="col">
-                <select id="period" class="form-select" aria-label="Select" )>
-                    <option selected value="1d">1 day</option>
-                    <option value="5d">5 days</option>
-                    <option value="1mo">1 month</option>
-                    <option value="3mo">3 months</option>
-                    <option value="6mo">6 months</option>
-                    <option value="1y">1 year</option>
-                    <option value="2y">2 years</option>
-                    <option value="5y">5 years</option>
-                    <option value="10y">10 years</option>
-                    <option value="ytd">Year to date</option>
-                    <option value="max">Max</option>
-                </select>
-            </div>
-            <div class="col"><b>Interval</b></div>
-
-            <div class="col">
-                <select id="interval" class="form-select" aria-label="Select" )>
-                    <option selected value="1m">1 minute</option>
-                    <option value="2m">2 minutes</option>
-                    <option value="5m">5 minutes</option>
-                    <option value="15m">15 minutes</option>
-                    <option value="30m">30 minutes</option>
-                    <option value="60m">60 minutes</option>
-                    <option value="90m">90 minutes</option>
-                    <option value="1d">1 day</option>
-                    <option value="5d">5 days</option>
-                    <option value="1w">1 week</option>
-                    <option value="1m">1 month</option>
-                    <option value="3m">3 months</option>
-
-                </select>
-            </div>
             <div class="col">
                 <button type="button" class="btn btn-primary" onclick="callback()">Fetch stock</button>
             </div>
-            <div class="w-100" style="padding:10px;text-align:right;font-size: small;"><i>Note: not all intervals are
-                    valid for all periods</i></div>
+            <div class="w-100" style="padding:10px;text-align:right;font-size: small;"><i>Note:logo images of some companies are not available</i></div>
 
             <div class="col-3"><p><b>Stock info</b></p>
                 <p>Symbol: <span id="symbol">N/A</span></p>
+                <p>Sector: <span id="sector">N/A</span></p>
                 <p>Year High: <span id="yearHigh">N/A</span></p>
                 <p>Year Low: <span id="yearLow">N/A</span></p>
-
+                <p>fullTimeEmployees: <span id="fullTimeEmployees">N/A</span></p>
+                <p>city: <span id="city">N/A</span></p>
+                <p>phone: <span id="phone">N/A</span></p>
+                <p>website: <span id="website">N/A</span></p>
+               
                 
             </div>
             <div class="col-9">
@@ -98,13 +67,33 @@ tock
            </div>    
         </div>
 
+        <section class="stockTwo pt-3">
+            <article class="blog-post aboutCompany" >    
+            </article>
+
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Other information</th>
+                  <th scope="col"></th>
+                </tr>
+                </thead>
+                <tbody class="stockTable">
+                <tr>
+                  <th scope="row">1</th>
+                  <td>Mark</td>
+                  <td>Otto</td>
+                </tr>
+                </tbody>
+              </table>
+            </section>
+
     </div>
  <script src="https://cdn.plot.ly/plotly-2.16.1.min.js"></script>
     <script>
         async function callback() {
             let Stock = document.getElementById('stock').value;
-            let Period = document.getElementById('period').value;
-            let Interval = document.getElementById('interval').value;
             //alert(Stock+Period+Interval);
             //return;
             let response = await fetch("/callback/getStock?data=" + Stock );
@@ -123,17 +112,47 @@ tock
             }
         }
         function info(json) {
+            console.log(json)
             let name = document.getElementById('companyName');
             name.innerHTML = json.shortName;
             name = document.getElementById('symbol');
             name.innerHTML = json.symbol;
+            name = document.getElementById('sector');
+            name.innerHTML = json.sector;
             name = document.getElementById('yearHigh');
             name.innerHTML = json.a52high.toFixed(2);
             name = document.getElementById('yearLow');
             name.innerHTML = json.a52low.toFixed(2);
             logo = document.getElementById("logo");           
-            console.log(logo)
+            // console.log(logo)
             logo.innerHTML = `<img src="${json.logo}" alt="LOGO" >`
+            name = document.querySelector('.aboutCompany')
+            console.log(name);
+            name.innerHTML = `
+            <h2 class="blog-post-title">About Company</h2>
+            <p>${json.about}</p>
+`
+            console.log(json.about)
+            name = document.getElementById("fullTimeEmployees")
+            name.innerHTML = json.fullTimeEmployees
+            name = document.getElementById("city")
+            name.innerHTML = json.city
+            name = document.getElementById("phone")
+            name.innerHTML = json.phone
+            name = document.getElementById("website")
+            name.innerHTML =  `<a href="${json.website}">${json.website}</a>`
+
+            let arr = ['grossProfits','totalCash','totalDebt','totalRevenue','totalCashPerShare','revenuePerShare','bookValue','priceToBook','marketCap','averageVolume']
+            stockTable = document.querySelector('.stockTable')
+            trs = ``
+            arr.forEach((element,num) => {
+              trs+= `<tr>
+                  <th scope="row">${num+1}</th>
+                  <td>${element}</td>
+                  <td>${json[element]}</td>
+                </tr>`
+            });
+            stockTable.innerHTML= trs
         }
 
         async function fetchListOfStocks() {

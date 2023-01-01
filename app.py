@@ -37,7 +37,15 @@ def cb(endpoint):
         symbol = stock
         logo = data['logo_url']['0']
         info = {"a52high": max, "a52low": min,
-                "shortName": data['longName']['0'] , "symbol": symbol,"logo":logo}
+                "shortName": data['longName']['0'] , "symbol": symbol,"logo":logo,"about":data['longBusinessSummary']['0'],
+                "fullTimeEmployees":data['fullTimeEmployees']['0'],
+                "city":data['city']['0'],
+                "website":data['website']['0'],
+                "phone":data['phone']['0'],"sector":data['sector']['0'],
+                }
+        tableinfo=['grossProfits','totalCash','totalDebt','totalRevenue','totalCashPerShare','revenuePerShare','bookValue','priceToBook','marketCap','averageVolume']
+        for i in tableinfo:
+            info[i]=data[i]['0']
         return json.dumps(info)
 
     elif endpoint == "fetchListOfStocks":
