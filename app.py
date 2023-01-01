@@ -27,12 +27,28 @@ def cb(endpoint):
         return gm(request.args.get('data'))
     elif endpoint == "getInfo":
         stock = request.args.get('data')
-        df1 = pd.read_csv(f"./static/nifty_500_data/AWL.csv")
-        max = df1['Close'].max()
-        min = df1['Close'].min()
+        # JSON file
+        f = open(f'./static/db/companyInfo/{stock}.json', "r")
+        # Reading from file
+        data = json.loads(f.read())
+        # print(type(data),data['sector']['0'])
+        max = data['fiftyTwoWeekHigh']['0']
+        min = data['fiftyTwoWeekLow']['0']
+        symbol = stock
+        logo = data['logo_url']['0']
         info = {"a52high": max, "a52low": min,
-                "shortName": "ntggg", "symbol": "hell"}
+                "shortName": data['longName']['0'] , "symbol": symbol,"logo":logo}
         return json.dumps(info)
+
+    elif endpoint == "fetchListOfStocks":
+        df = pd.read_csv("./static/db/list_500.csv")
+        companyName=(df['Company Name']).to_list()
+        symbol = (df['Symbol']).to_list()
+        listOf500 = {"symbol":symbol,
+        "companyName":companyName
+        }
+        return json.dumps(listOf500)
+
     else:
         return "Bad endpoint", 400
 
@@ -41,7 +57,7 @@ def cb(endpoint):
 
 def gm(stock):
     # Create a line graph
-    df = pd.read_csv("./static/ACC.csv")
+    df = pd.read_csv(f"./static/nifty_500_data/{stock}.csv")
     df = df.reset_index()
     max = (df['Open'].max())
     min = (df['Open'].min())
@@ -57,6 +73,16 @@ def gm(stock):
     graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
     return graphJSON
 
+@app.route('/fetchListOfStocks')
+def fetchListOfStocks():
+    df = pd.read_csv("./static/db/list_500.csv")
+    info=df.Industry+"("+df.Symbol+")"
+    symbol = df.Symbol
+    listOf500 = {"info":1,
+    "info2":2,
+    # "symbol":symbol
+    }
+    return json.dumps(listOf500)
 
 if __name__ == "__main__":
     app.run(debug=True)

@@ -38,3 +38,12 @@ body {
     display: inline-block;
     font-weight: 500;
 }
+
+/* stock page */
+.head-logo{
+    width: 100%;
+    display: flex!important;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
