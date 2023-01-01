@@ -88,7 +88,7 @@ tock
         </div>
 
     </div>
-
+ <script src="https://cdn.plot.ly/plotly-2.16.1.min.js"></script>
     <script>
         async function callback() {
             let Stock = document.getElementById('stock').value;
@@ -117,9 +117,9 @@ tock
             name = document.getElementById('symbol');
             name.innerHTML = json.symbol;
             name = document.getElementById('dayHigh');
-            name.innerHTML = json.dayHigh;
+            name.innerHTML = json.a52high;
             name = document.getElementById('dayLow');
-            name.innerHTML = json.dayLow;
+            name.innerHTML = json.a52low;
         }
     </script>
 
